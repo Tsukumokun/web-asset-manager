@@ -50,9 +50,9 @@ hash git >/dev/null && /usr/bin/env git clone https://github.com/Tsukumokun/web-
 echo "${BLUE}Installing executable...${NORMAL}"
 mkdir -p $PREFIX/bin/
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    install -o root -g wheel -m 755 /tmp/wam/bin $PREFIX/bin/wam
+    install -o root -g wheel -m 755 /tmp/wam/bin/wam $PREFIX/bin/wam
 else
-    install -o root -g root -m 755 /tmp/wam/bin $PREFIX/bin/wam
+    install -o root -g root -m 755 /tmp/wam/bin/wam $PREFIX/bin/wam
 fi
 echo "${BLUE}Installing support files...${NORMAL}"
 mkdir -p $PREFIX/lib/wam/
@@ -62,7 +62,7 @@ else
     install -o root -g root -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
 fi
 echo "${BLUE}Removing temporary files...${NORMAL}"
-rm -rf -v /tmp/wam/
+rm -rf /tmp/wam/
 
 echo "${GREEN}You've got...${NORMAL}"
 echo

@@ -21,9 +21,9 @@ if [ -t 1 ]; then
 fi
 
 echo "${BLUE}Uninstalling executable...${NORMAL}"
-rm -f -v $PREFIX/bin/wam
+rm -f $PREFIX/bin/wam
 echo "${BLUE}Unstalling support files...${NORMAL}"
-rm -rf -v $PREFIX/lib/wam
+rm -rf $PREFIX/lib/wam
 
 
 echo "${GREEN}You've removed...${NORMAL}"
