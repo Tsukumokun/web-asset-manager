@@ -4,9 +4,9 @@ Web Asset Manager
 How to install
 ----------
 With `curl`<br/>
-    > curl -L https://raw.github.com/install.sh | sh
+    `curl -L https://raw.github.com/install.sh | sh` <br/>
 With `wget`<br/>
-    > wget --no-check-certificate https://raw.github.com/install.sh -O - | sh
+    `wget --no-check-certificate https://raw.github.com/install.sh -O - | sh`
 
 How to use
 ----------
@@ -34,7 +34,7 @@ Author
 Christopher Kelley<br/>
 [tsukumokun@icloud.com](mailto:tsukumokun@icloud.com)
 
-Notes from the Authors
+Notes from the Author
 ---
 
 
