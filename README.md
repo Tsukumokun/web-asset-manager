@@ -4,16 +4,16 @@ Web Asset Manager
 How to install
 ----------
 With `curl`<br/>
-    `curl -L https://raw.github.com/Tsukumokun/web-asset-manager/master/install.sh | sh` <br/>
+    `sudo -s 'curl -L https://raw.github.com/Tsukumokun/web-asset-manager/master/install.sh | sh'` <br/>
 With `wget`<br/>
-    `wget --no-check-certificate https://raw.github.com/Tsukumokun/web-asset-manager/master/install.sh -O - | sh`
+    `sudo -s 'wget --no-check-certificate https://raw.github.com/Tsukumokun/web-asset-manager/master/install.sh -O - | sh'`
 
 How to uninstall
 ----------
 With `curl`<br/>
-    `curl -L https://raw.github.com/Tsukumokun/web-asset-manager/master/uninstall.sh | sh` <br/>
+    `sudo -s 'curl -L https://raw.github.com/Tsukumokun/web-asset-manager/master/uninstall.sh | sh'` <br/>
 With `wget`<br/>
-    `wget --no-check-certificate https://raw.github.com/Tsukumokun/web-asset-manager/master/uninstall.sh -O - | sh`
+    `sudo -s 'wget --no-check-certificate https://raw.github.com/Tsukumokun/web-asset-manager/master/uninstall.sh -O - | sh'`
 
 How to use
 ----------
