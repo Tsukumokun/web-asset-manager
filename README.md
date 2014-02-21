@@ -19,11 +19,12 @@ As usual add `@import "file.css";` to any css file.<br/>
 
 How to compile
 ----------
-js-compile main.js<br/>
-css-compile main.css
+wam main.js<br/>
+wam main.css
 
 Optional flags
 ----------
+-l : specifies language
 -m : only minify files (files will be placed in file.min.js)<br/>
 -M : don't minify output file<br/>
 -b : specify a different location for compiled code (default is current directory)
