@@ -27,6 +27,7 @@ elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
     _java="$JAVA_HOME/bin/java"
 else
     echo "${RED}Not Found: java - install java >v1.5 and retry.${NORMAL}"
+    exit 1
 fi
 
 if [[ "$_java" ]]; then
@@ -36,13 +37,14 @@ if [[ "$_java" ]]; then
         echo "Found it!"
     else         
         echo "${RED}Not Found: java correct version - install java >v1.5 and retry.${NORMAL}"
+        exit 1
     fi
 fi
 
 echo "${BLUE}Cloning WAM (Web-Asset-Manager)...${NORMAL}"
 hash git >/dev/null && /usr/bin/env git clone https://github.com/Tsukumokun/web-asset-manager.git /tmp/wam || {
   echo "${RED}Not Found: git - install git and retry.${NORMAL}"
-  exit
+  exit 1
 }
 
 echo "${BLUE}Installing executable...${NORMAL}"
