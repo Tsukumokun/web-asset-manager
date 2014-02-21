@@ -45,19 +45,25 @@ hash git >/dev/null && /usr/bin/env git clone https://github.com/Tsukumokun/web-
   exit
 }
 
+echo "${BLUE}Installing executable...${NORMAL}"
 mkdir -p $PREFIX/bin/
 install -o root -g root -m 755 /tmp/wam/bin $PREFIX/bin/wam
+echo "${BLUE}Installing support files...${NORMAL}"
 mkdir -p $PREFIX/lib/wam/
 install -o root -g root -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
 
 rm -rf /tmp/wam/
 
-echo "${GREEN}  (\`\ .-') /\`  ('-.     _   .-')    ${NORMAL}"
-echo "${GREEN}   \`.( OO ),' ( OO ).-.( '.( OO )_  ${NORMAL}"
-echo "${GREEN},--./  .--.   / . --. / ,--.   ,--.)${NORMAL}"
-echo "${GREEN}|      |  |   | \-.  \  |   \`.'   | ${NORMAL}"
-echo "${GREEN}|  |   |  |,.-'-'  |  | |         | ${NORMAL}"
-echo "${GREEN}|  |.'.|  |_)\| |_.'  | |  |'.'|  | ${NORMAL}"
-echo "${GREEN}|         |   |  .-.  | |  |   |  | ${NORMAL}"
-echo "${GREEN}|   ,'.   |   |  | |  | |  |   |  | ${NORMAL}"
-echo "${GREEN}'--'   '--'   `--' `--' `--'   `--' ${NORMAL}"
+echo "${GREEN}You've got...${NORMAL}"
+echo
+echo "${YELLOW}  (\`\ .-') /\`  ('-.     _   .-')    ${NORMAL}"
+echo "${YELLOW}   \`.( OO ),' ( OO ).-.( '.( OO )_  ${NORMAL}"
+echo "${YELLOW},--./  .--.   / . --. / ,--.   ,--.)${NORMAL}"
+echo "${YELLOW}|      |  |   | \-.  \  |   \`.'   | ${NORMAL}"
+echo "${YELLOW}|  |   |  |,.-'-'  |  | |         | ${NORMAL}"
+echo "${YELLOW}|  |.'.|  |_)\| |_.'  | |  |'.'|  | ${NORMAL}"
+echo "${YELLOW}|         |   |  .-.  | |  |   |  | ${NORMAL}"
+echo "${YELLOW}|   ,'.   |   |  | |  | |  |   |  | ${NORMAL}"
+echo "${YELLOW}'--'   '--'   \`--' \`--' \`--'   \`--' ${NORMAL}"
+echo 
+echo "${GREEN}Enjoy!${NORMAL}"
