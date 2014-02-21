@@ -34,7 +34,7 @@ if [[ "$_java" ]]; then
     version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
     echo version "$version"
     if [[ "$version" > "1.4" ]]; then
-        echo "Found it!"
+        echo "${NORMAL}"
     else         
         echo "${RED}Not Found: java correct version - install java >v1.5 and retry.${NORMAL}"
         exit 1
@@ -49,12 +49,20 @@ hash git >/dev/null && /usr/bin/env git clone https://github.com/Tsukumokun/web-
 
 echo "${BLUE}Installing executable...${NORMAL}"
 mkdir -p $PREFIX/bin/
-install -o root -g root -m 755 /tmp/wam/bin $PREFIX/bin/wam
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    install -o root -g wheel -m 755 /tmp/wam/bin $PREFIX/bin/wam
+else
+    install -o root -g root -m 755 /tmp/wam/bin $PREFIX/bin/wam
+fi
 echo "${BLUE}Installing support files...${NORMAL}"
 mkdir -p $PREFIX/lib/wam/
-install -o root -g root -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    install -o root -g wheel -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
+else
+    install -o root -g root -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
+fi
 echo "${BLUE}Removing temporary files...${NORMAL}"
-rm -rf /tmp/wam/
+rm -rf -v /tmp/wam/
 
 echo "${GREEN}You've got...${NORMAL}"
 echo
