@@ -57,9 +57,9 @@ fi
 echo "${BLUE}Installing support files...${NORMAL}"
 mkdir -p $PREFIX/lib/wam/
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    install -o root -g wheel -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
+    install -o root -g wheel -m 644 /tmp/wam/lib/* $PREFIX/lib/wam/
 else
-    install -o root -g root -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
+    install -o root -g root -m 644 /tmp/wam/lib/* $PREFIX/lib/wam/
 fi
 echo "${BLUE}Removing temporary files...${NORMAL}"
 rm -rf /tmp/wam/
