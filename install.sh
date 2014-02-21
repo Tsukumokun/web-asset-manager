@@ -33,7 +33,7 @@ fi
 if [[ "$_java" ]]; then
     version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
     echo version "$version"
-    if [[ "$version" >= "1.5" ]]; then
+    if [[ "$version" > "1.4" ]]; then
         echo "Found it!"
     else         
         echo "${RED}Not Found: java correct version - install java >v1.5 and retry.${NORMAL}"
@@ -53,7 +53,7 @@ install -o root -g root -m 755 /tmp/wam/bin $PREFIX/bin/wam
 echo "${BLUE}Installing support files...${NORMAL}"
 mkdir -p $PREFIX/lib/wam/
 install -o root -g root -m 311 /tmp/wam/lib/* $PREFIX/lib/wam
-
+echo "${BLUE}Removing temporary files...${NORMAL}"
 rm -rf /tmp/wam/
 
 echo "${GREEN}You've got...${NORMAL}"
