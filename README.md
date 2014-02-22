@@ -17,25 +17,16 @@ With `wget`<br/>
 
 How to use
 ----------
-JS:<br/>
-Add `require("file.js")` to any javascript file.<br/>
-`file.js` will then upon compilation be inserted at exactly that spot.<br/>
-CSS:<br/>
-As usual add `@import "file.css";` to any css file.<br/>
-`file.css` will then upon compilation be inserted at exactly that spot.<br/>
+Add c-style preprocessor arguments to your code.<br/>
+This includes includes, defines, if-statements, ifdef, indef, etc.<br/>
+If it works with a c preprocessor, it will probably work here.<br/>
+<br/>
+Now run, from anywhere, `wam file`<br/>
+For more detail on available options run `wam -h` or `wam --help`
 
-How to compile
+How to report bugs
 ----------
-wam main.js<br/>
-wam main.css
-
-Optional flags
-----------
--l : specifies language<br/>
--m : only minify files (files will be placed in file.min.js)<br/>
--M : don't minify output file<br/>
--d : specify a different location for compiled code (default is current directory)
-
+Please email me! Link above
 
 Author
 --- 
@@ -44,7 +35,14 @@ Christopher Kelley<br/>
 
 Notes from the Author
 ---
+I worked hard to make this as detailed as possible, please report any bugs you find, or any suggestions you may have.<br/>
+As usual this product is licenced and copyrighted!<br/>
+If you wish to help make this product better by all means! But please adhere to the license and keep my name intact!<br/>
+Thank you! I hope you enjoy!
 
+Credit
+---
+Minification powered by yui-compressor!
 
 License
 ----------
