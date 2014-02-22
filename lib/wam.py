@@ -84,7 +84,7 @@ def pre_compile(in_file,out_file):
             print("Pre-compiling process failed.")
             exit(1)
     for line in fileinput.FileInput(out_file,inplace=1):
-        if not line.startswith("#"):
+        if not line.startswith("#") and line.rstrip():
             print line
 
 def minify(in_file,out_file):
