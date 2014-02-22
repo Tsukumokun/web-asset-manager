@@ -34,15 +34,17 @@ if args.minify_only and args.no_minify:
 
 if args.dest == None:
     args.dest = os.getcwd()
-print os.path.relpath(args.dest)
-if os.path.isfile(os.path.relpath(args.dest)):
+elif not os.path.isabs(args.dest):
+    args.dest = "./"+args.dest
+
+if os.path.isfile(args.dest):
     print "wam.py: error: destination is a file"
     exit(1)
-if not os.access(os.path.dirname(os.path.relpath(args.dest)), os.W_OK):
+if not os.access(os.path.dirname(args.dest), os.W_OK):
     print "wam.py: error: destination is not writable"
     exit(1)
-if not os.path.exists(os.path.relpath(directory)):
-    os.makedirs(os.path.relpath(directory))
+if not os.path.exists(args.dest):
+    os.makedirs(args.dest)
 
 
 
