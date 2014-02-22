@@ -1,6 +1,9 @@
 import argparse
 import os
 
+import wam_js
+#import wam_css
+
 parser = argparse.ArgumentParser(prog="wam",description='Web Asset Manager')
 parser.add_argument('file', type=str,
                    help='a file for the compiler')
@@ -46,7 +49,7 @@ if not os.path.exists(args.dest):
     os.makedirs(args.dest)
 
 if args.language == "js":
-    import wam_js
+    compile_js(args)
 elif args.language == "css":
-    import wam_css
+    print "not yet supported"
 
