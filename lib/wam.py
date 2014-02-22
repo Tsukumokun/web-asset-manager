@@ -15,7 +15,6 @@
 import argparse
 import os
 import fileinput
-import re
 
 parser = argparse.ArgumentParser(prog="wam",description='Web Asset Manager')
 parser.add_argument('file', type=str,
@@ -87,7 +86,9 @@ def pre_compile(in_file,out_file):
     for line in fileinput.FileInput(out_file,inplace=1):
         if not line.startswith("#"):
             print line
-    open(out_file,'w').write(re.sub('\n\s*\n+','\n', open(out_file).read()))
+    for line in fileinput.FileInput(out_file,inplace=1):
+        if line.rstrip():
+            print line
 
 def minify(in_file,out_file):
     if os.system('java -jar /usr/local/lib/wam/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0:
