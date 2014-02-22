@@ -1,7 +1,6 @@
 import argparse
 import os
 
-
 parser = argparse.ArgumentParser(prog="wam",description='Web Asset Manager')
 parser.add_argument('file', type=str,
                    help='a file for the compiler')
@@ -46,6 +45,8 @@ if not os.access(os.path.dirname(args.dest), os.W_OK):
 if not os.path.exists(args.dest):
     os.makedirs(args.dest)
 
+if args.language == "js":
+    import wam_js
+elif args.language == "css":
+    import wam_css
 
-
-print args
