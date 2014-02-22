@@ -1,7 +1,7 @@
 import argparse
 import os
 
-parser = argparse.ArgumentParser(description='Web Asset Manager')
+parser = argparse.ArgumentParser(prog="wam",description='Web Asset Manager')
 parser.add_argument('file', type=str,
                    help='a file for the compiler')
 parser.add_argument('-l', '--lang', choices=("js","css"),type=str, dest='language',
