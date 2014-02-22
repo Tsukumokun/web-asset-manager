@@ -86,9 +86,6 @@ def pre_compile(in_file,out_file):
     for line in fileinput.FileInput(out_file,inplace=1):
         if not line.startswith("#"):
             print line
-    for line in fileinput.FileInput(out_file,inplace=1):
-        if line.rstrip():
-            print line
 
 def minify(in_file,out_file):
     if os.system('java -jar /usr/local/lib/wam/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0:
@@ -102,6 +99,10 @@ if args.minify_only:
 pre_compile(args.file,args.output)
 if not args.no_minify:
     minify(args.output,args.output)
+
+for line in fileinput.FileInput(args.output,inplace=1):
+        if line.rstrip():
+            print line
 
 
 
