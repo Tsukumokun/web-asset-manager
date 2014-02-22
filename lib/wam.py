@@ -2,7 +2,7 @@ import argparse
 import os
 
 import wam_js
-#import wam_css
+import wam_css
 
 parser = argparse.ArgumentParser(prog="wam",description='Web Asset Manager')
 parser.add_argument('file', type=str,
@@ -17,21 +17,27 @@ parser.add_argument('-M', '--no-minify', dest='no_minify', action='store_const',
                    help='do not minify, only concatenate the files')
 parser.add_argument('-d', '--destination', metavar="dest", dest='dest', type=str,
                    help='destination folder for output')
+parser.add_argument('-o', '--output', metavar="output", dest='output', type=str,
+                   help='destination file to output')
 
 args = parser.parse_args()
 
 if args.language == None:
     if args.file.find(".") < 0:
-        print "wam.py: error: no language or extension found, ambiguous file"
+        print "wam: error: no language or extension found, ambiguous file"
         exit(1)
     args.language = args.file[args.file.index(".")+1:]
 
 if args.language != "js" and args.language != "css":
-    print "wam.py: error: unsupported language - " + args.language
+    print "wam: error: unsupported language - " + args.language
     exit(1)
 
 if args.minify_only and args.no_minify:
-    print "wam.py: error: minify-only and no-minify are mutually exclusive"
+    print "wam: error: minify-only and no-minify are mutually exclusive"
+    exit(1)
+
+if args.minify_only and args.output != None:
+    print "wam: error: output file specified but option set to not compile"
     exit(1)
 
 if args.dest == None:
@@ -48,8 +54,17 @@ if not os.access(os.path.dirname(args.dest), os.W_OK):
 if not os.path.exists(args.dest):
     os.makedirs(args.dest)
 
+if args.output == None:
+    args.output = args.file
+if args.output != None:
+    if args.output.find(".") < 0:
+        args.output += ".o"
+    else:
+        index = args.output.index(".")
+        args.output = args.output[:index]+".o"+args.output[index:]
+
 if args.language == "js":
-    compile_js(args)
+    wam_js.pre_compile(args.file,args.output)
 elif args.language == "css":
-    print "not yet supported"
+    wam_css.compile(args)
 
