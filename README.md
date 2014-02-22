@@ -34,7 +34,7 @@ Optional flags
 -l : specifies language<br/>
 -m : only minify files (files will be placed in file.min.js)<br/>
 -M : don't minify output file<br/>
--b : specify a different location for compiled code (default is current directory)
+-d : specify a different location for compiled code (default is current directory)
 
 
 Author
