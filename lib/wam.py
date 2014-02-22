@@ -101,7 +101,7 @@ if not args.no_minify:
     minify(args.output,args.output)
 
 for line in fileinput.FileInput(args.output,inplace=1):
-        if line.rstrip():
+    if line.rstrip() != '':
             print line
 
 
