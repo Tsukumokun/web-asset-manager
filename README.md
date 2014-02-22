@@ -1,6 +1,12 @@
 Web Asset Manager
 ==========
 
+License
+----------
+[![CCLegal](http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png "CC BY-NC-ND Legal Code")](http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US "Creative Commons License")
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.<br/>
+For more information visit the [Creative Commons Website]
+
 How to install
 ----------
 With `curl`<br/>
@@ -44,6 +50,7 @@ Credit
 ---
 Minification powered by yui-compressor!
 
-License
-----------
-See LICENCE file in project root.
+
+
+
+[Creative Commons Website]:http://creativecommons.org/choose/ "Creative Commons Website"
