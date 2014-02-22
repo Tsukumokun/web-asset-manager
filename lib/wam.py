@@ -31,6 +31,9 @@ parser.add_argument('-d', '--destination', metavar="dest", dest='dest', type=str
                    help='destination folder for output')
 parser.add_argument('-o', '--output', metavar="output", dest='output', type=str,
                    help='destination file to output')
+parser.add_argument('-w', '--no-warnings', dest='no_warnings', action='store_const',
+                   const=True, default=False,
+                   help='suppress warnings on pre-compile')
 
 args = parser.parse_args()
 
@@ -72,9 +75,14 @@ if args.output == None:
 args.output = args.dest+"/"+args.output
 
 def pre_compile(in_file,out_file):
-    if os.system("gcc -xc -C -E "+in_file+" -o "+out_file) > 0:
-        print("Pre-compiling process failed.")
-        exit(1)
+    if args.no_warnings:
+        if os.system("gcc -xc -C -E -w "+in_file+" -o "+out_file) > 0:
+            print("Pre-compiling process failed.")
+            exit(1)
+    else:
+        if os.system("gcc -xc -C -E "+in_file+" -o "+out_file) > 0:
+            print("Pre-compiling process failed.")
+            exit(1)
     for line in fileinput.FileInput(out_file,inplace=1):
         if not line.startswith("#"):
             print line
