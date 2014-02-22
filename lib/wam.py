@@ -66,7 +66,7 @@ def pre_compile(in_file,out_file):
             print line
 
 def minify(in_file,out_file):
-    if os.system('java -jar yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0:
+    if os.system('java -jar /usr/local/lib/wam/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0:
         print("Minification process failed.")
         exit(1)
 
