@@ -61,14 +61,14 @@ echo "${BLUE}Installing...${NORMAL}"
 sudo echo -n
 
 echo "${BLUE}Installing executable...${NORMAL}"
-mkdir -p $PREFIX/bin/
+sudo mkdir -p $PREFIX/bin/
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sudo install -o root -g wheel -m 755 /tmp/wam/bin/wam $PREFIX/bin/wam
 else
     sudo install -o root -g root -m 755 /tmp/wam/bin/wam $PREFIX/bin/wam
 fi
 echo "${BLUE}Installing support files...${NORMAL}"
-mkdir -p $PREFIX/lib/wam/
+sudo mkdir -p $PREFIX/lib/wam/
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sudo install -o root -g wheel -m 644 /tmp/wam/lib/* $PREFIX/lib/wam/
 else
