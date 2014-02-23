@@ -46,7 +46,7 @@ fileName, fileExtension = os.path.splitext(args.file)
 
 if args.language == None:
     fileExtension != '' or die("no language or extension found, ambiguous file")
-    args.language = fileExtension
+    args.language = fileExtension[fileExtension.index('.')+1:]
 
 args.language in ("js","css") or die("unsupported language - " + args.language)
 
