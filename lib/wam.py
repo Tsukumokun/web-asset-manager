@@ -63,7 +63,7 @@ os.access(os.path.dirname(args.dest), os.W_OK) or die("destination is not writab
 if not os.path.exists(args.dest):
     os.makedirs(args.dest)
 
-if args.output == None:
+if args.output == None and args.output.find(".o") < 0:
     args.output = fileName+".o"+fileExtension
 args.output = args.dest+"/"+args.output
 
