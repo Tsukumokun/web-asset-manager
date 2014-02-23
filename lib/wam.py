@@ -63,7 +63,7 @@ os.access(os.path.dirname(args.dest), os.W_OK) or die("destination is not writab
 if not os.path.exists(args.dest):
     os.makedirs(args.dest)
 
-if args.output == None and fileName.find(".o") < 0:
+if args.output == None:
     args.output = fileName+".o"+fileExtension
 args.output = args.dest+"/"+args.output
 
@@ -85,6 +85,7 @@ def _minify(in_file,out_file):
     and die("minification process failed")
 
 if args.minify_only:
+    args.output = args.output.replace(".o.o",".o")
     _minify(args.file,args.output.replace(".o",".min"))
     exit(0)
 
