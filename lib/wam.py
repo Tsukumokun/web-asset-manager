@@ -26,18 +26,18 @@ parser.add_argument('file', type=str,
                    help='a file for the compiler')
 parser.add_argument('-l', '--lang', choices=("js","css"),type=str, dest='language',
                    help='set the language the compiler should use')
-parser.add_argument('-m', '--minify-only', dest='minify_only', action='store_const',
-                   const=True, default=False,
+parser.add_argument('-m', '--minify-only', dest='minify_only', action='store_true',
+                   default=False,
                    help='only minify, do not compile the file')
-parser.add_argument('-M', '--no-minify', dest='no_minify', action='store_const',
-                   const=True, default=False,
+parser.add_argument('-M', '--no-minify', dest='no_minify', action='store_true',
+                   default=False,
                    help='do not minify, only compile the file')
 parser.add_argument('-d', '--destination', metavar="dest", dest='dest', type=str,
                    help='destination folder for output')
 parser.add_argument('-o', '--output', metavar="output", dest='output', type=str,
                    help='destination file to output')
-parser.add_argument('-w', '--no-warnings', dest='no_warnings', action='store_const',
-                   const=True, default=False,
+parser.add_argument('-w', '--no-warnings', dest='no_warnings', action='store_true',
+                   default=False,
                    help='suppress warnings on pre-compile')
 
 args = parser.parse_args()
