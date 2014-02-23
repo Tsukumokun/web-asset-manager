@@ -34,10 +34,12 @@ if [ -t 1 ]; then
     fi
 fi
 
+sudo echo -n
+
 echo "${BLUE}Uninstalling executable...${NORMAL}"
-rm -f $PREFIX/bin/wam
+sudo rm -f $PREFIX/bin/wam
 echo "${BLUE}Unstalling support files...${NORMAL}"
-rm -rf $PREFIX/lib/wam/
+sudo rm -rf $PREFIX/lib/wam/
 
 
 echo "${GREEN}You've removed...${NORMAL}"
