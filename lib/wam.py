@@ -38,7 +38,7 @@ parser.add_argument('-o', '--output', metavar="output", dest='output', type=str,
                    help='destination file to output')
 parser.add_argument('-w', '--no-warnings', dest='no_warnings', action='store_true',
                    default=False,
-                   help='suppress warnings on pre-compile')
+                   help='suppress warnings on compile')
 
 args = parser.parse_args()
 
