@@ -71,10 +71,10 @@ args.output = args.dest+"/"+args.output
 def _compile(in_file,out_file):
     if args.no_warnings:
         os.system("gcc -xc -C -E -w "+in_file+" -o "+out_file) > 0 \
-        or die("compiling process failed")
+        and die("compiling process failed")
     else:
         os.system("gcc -xc -C -E "+in_file+" -o "+out_file) > 0 \
-        or die("compiling process failed")
+        and die("compiling process failed")
 
     for line in fileinput.FileInput(out_file,inplace=1):
         if not line.startswith("#"):
@@ -82,7 +82,7 @@ def _compile(in_file,out_file):
 
 def _minify(in_file,out_file):
     os.system('java -jar /usr/local/lib/wam/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0 \
-    or die("minification process failed")
+    and die("minification process failed")
 
 if args.minify_only:
     _minify(args.file,args.output.replace(".o",".min"))
