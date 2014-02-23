@@ -17,7 +17,7 @@ See my website!
 
 How to report bugs
 ----------
-Please email me! Link above
+Please email me! Link below
 
 Author
 --- 
