@@ -53,7 +53,7 @@ if [[ "$_java" ]]; then
 fi
 
 echo "${BLUE}Retrieving WAM (Web-Asset-Manager)...${NORMAL}"
-hash git >/dev/null && /usr/bin/env git clone -q https://Tsukumokun@bitbucket.org/Tsukumokun/wam.git /tmp/wam || {
+hash git >/dev/null && /usr/bin/env git clone -q https://github.com/Tsukumokun/web-asset-manager.git /tmp/wam || {
   echo "${RED}Not Found: git - install git and retry.${NORMAL}"
   exit 1
 }
