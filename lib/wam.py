@@ -38,11 +38,13 @@ parser.add_argument('-w', '--no-warnings', dest='no_warnings', action='store_con
 
 args = parser.parse_args()
 
+fileName, fileExtension = os.path.splitext(args.file)
+
 if args.language == None:
-    if args.file.find(".") < 0:
+    if fileExtension == '':
         print "wam: error: no language or extension found, ambiguous file"
         exit(1)
-    args.language = args.file[args.file.index(".")+1:]
+    args.language = fileExtension
 
 if args.language != "js" and args.language != "css":
     print "wam: error: unsupported language - " + args.language
@@ -67,12 +69,7 @@ if not os.path.exists(args.dest):
     os.makedirs(args.dest)
 
 if args.output == None:
-    args.output = args.file
-    index = args.output.find(".")
-    if index < 0:
-        args.output += ".o"
-    else:
-        args.output = args.output[:index]+".o"+args.output[index:]
+    args.output = fileName+".o"+fileExtension
 args.output = args.dest+"/"+args.output
 
 
