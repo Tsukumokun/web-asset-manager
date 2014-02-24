@@ -32,9 +32,12 @@ parser.add_argument('-m', '--minify-only', dest='minify_only', action='store_tru
 parser.add_argument('-M', '--no-minify', dest='no_minify', action='store_true',
                    default=False,
                    help='do not minify, only compile the file')
-parser.add_argument('-d', '--destination', metavar="dest", dest='dest', type=str,
+parser.add_argument('-d', '--destination', metavar='dest', dest='dest', type=str,
                    help='destination folder for output')
-parser.add_argument('-o', '--output', metavar="output", dest='output', type=str,
+parser.add_argument('-D', '--define', metavar='macro', dest='defines', 
+                   action='append',
+                   help='defines to be added to the compiler')
+parser.add_argument('-o', '--output', metavar='output', dest='output', type=str,
                    help='destination file to output')
 parser.add_argument('-w', '--no-warnings', dest='no_warnings', action='store_true',
                    default=False,
@@ -69,19 +72,20 @@ args.output = args.dest+"/"+args.output
 
 
 def _compile(in_file,out_file):
+    flags = "-xc -C -E"
     if args.no_warnings:
-        os.system("gcc -xc -C -E -w "+in_file+" -o "+out_file) > 0 \
-        and die("compiling process failed")
-    else:
-        os.system("gcc -xc -C -E "+in_file+" -o "+out_file) > 0 \
-        and die("compiling process failed")
+        flags += " -w"
+    for define in args.defines:
+        flags += " -D "+define
+    os.system("gcc "+flags+" "+in_file+" -o "+out_file) > 0 \
+    and die("compiling process failed")
 
     for line in fileinput.FileInput(out_file,inplace=1):
         if not line.startswith("#"):
             print line
 
 def _minify(in_file,out_file):
-    os.system('java -jar /usr/local/lib/wam/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0 \
+    os.system(os.path.dirname(os.path.realpath(__file__))+'/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0 \
     and die("minification process failed")
 
 if args.minify_only:
