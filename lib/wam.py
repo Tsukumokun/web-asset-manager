@@ -75,8 +75,9 @@ def _compile(in_file,out_file):
     flags = "-xc -C -E"
     if args.no_warnings:
         flags += " -w"
-    for define in args.defines:
-        flags += " -D "+define
+    if args.defines != None:
+        for define in args.defines:
+            flags += " -D "+define
     os.system("gcc "+flags+" "+in_file+" -o "+out_file) > 0 \
     and die("compiling process failed")
 
