@@ -85,7 +85,7 @@ def _compile(in_file,out_file):
             print line
 
 def _minify(in_file,out_file):
-    os.system(os.path.dirname(os.path.realpath(__file__))+'/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0 \
+    os.system("java -jar "+os.path.dirname(os.path.realpath(__file__))+'/yuicompressor.jar --type '+args.language+' '+in_file+' -o '+out_file) > 0 \
     and die("minification process failed")
 
 if args.minify_only:
