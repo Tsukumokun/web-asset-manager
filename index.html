@@ -1,1 +1,280 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <title>WAM</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body class="font-helvetica font-light color-flat-black">
+    <div class="ribbon">
+        <a href="https://github.com/Tsukumokun/web-asset-manager">Fork me on GitHub</a>
+    </div>
+    <div class="wam">
+        <span class="compiled">Compiled</span><br/>
+        <span class="with">with</span><br/>
+        <span class="WAM">WAM</span>
+    </div>
+    <section id="header">
+        <img id="logo" src="res/logo.png" />
+        <header class="font-bold">WAM<article id="beta" class="font-normal">Beta</article></header>
+
+        <article id="description" class="color-flat-gray font-semi-bold">Free Web Asset Manager</article>
+        <article id="credit" class="color-flat-gray font-semi-bold">Minification powered by <a href="http://yui.github.io/yuicompressor/">yui-compressor</a></article>
+    </section>
+
+    <a href="" id="wamlibs">
+        <span id="arrow">&gt;</span>
+        WAM-LIBS
+    </a>
+    
+    <section id="details">
+        <header id="downloadh">Download</header>
+        <article id="download">
+            <a href="https://raw.github.com/Tsukumokun/web-asset-manager/master/wam-install.sh" download>Download wam-install.sh</a>
+            <pre class="nolines inl"><code>curl -L https://raw.github.com/Tsukumokun/web-asset-manager/master/wam-install.sh | sh</code></pre>
+            <pre class="nolines inl"><code>wget --no-check-certificate https://raw.github.com/Tsukumokun/web-asset-manager/master/wam-install.sh -O - | sh</code></pre>
+            <a href="https://raw.github.com/Tsukumokun/web-asset-manager/master/wam-uninstall.sh" download>Download wam-uninstall.sh</a>
+            <pre class="nolines inl"><code>curl -L https://raw.github.com/Tsukumokun/web-asset-manager/master/wam-uninstall.sh | sh</code></pre>
+            <pre class="nolines inl"><code>wget --no-check-certificate https://raw.github.com/Tsukumokun/web-asset-manager/master/wam-uninstall.sh -O - | sh</code></pre>
+        </article>
+        <header id="abouth">About</header>
+        <article id="about">
+            WAM (Web Asset Manager) is a compiler for JS and CSS.
+            <br/><br/>
+            WAM can interpret all known c preprocessor directives.<br/><br/>
+            The most common among these are:<br/><br/>
+            <code>#include "file"</code><br/>
+            <code>#define MACRO() code</code><br/>
+            <code>#ifdef MACRO | #ifndef MACRO | #endif</code><br/>
+            <br/>
+            WAM can also minify your code using <a href="http://yui.github.io/yuicompressor/">yui-compressor</a>.
+            <br/><br/>
+            See <a href="#howtoh">How to Use</a> for more details on what WAM can do.
+        </article>
+        <header id="howtoh">How to Use</header>
+        <article id="howto">
+        <pre class="hidelines"><code>
+$ wam 
+
+    usage: wam [-h] [-l {js,css}] [-m] [-M] [-d dest] [-D macro] [-o output] [-w]
+           file
+
+$ wam -h
+
+    positional arguments:
+      file                  a file for the compiler
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -l {js,css}, --lang {js,css}
+                            set the language the compiler should use
+      -m, --minify-only     only minify, do not compile the file
+      -M, --no-minify       do not minify, only compile the file
+      -d dest, --destination dest
+                            destination folder for output
+      -D macro, --define macro
+                            defines to be added to the compiler
+      -o output, --output output
+                            destination file to output
+      -w, --no-warnings     suppress warnings on compile
+
+$ wam file
+
+    wam: error: no language or extension found, ambiguous file
+
+$ wam -m -M file.js
+
+    wam: error: minify-only and no-minify are mutually exclusive
+
+$ wam -d / file.js
+
+    wam: error: destination is not writable
+
+$ wam file1.js file2.js
+
+    wam: error: unrecognized arguments: file2.js
+        </code>
+        </pre>
+        Recommended Usage:
+        <pre class="hidelines"><code>
+$ wam js/app.js -d bin/ -o index.js
+
+$ wam css/app.css -d bin/ -o index.css
+        </code></pre>
+        <pre class="hidelines"><code>
+&lt;link href="bin/index.css" rel="stylesheet" /&gt;
+
+&lt;script src="bin/index.js"&gt;&lt;/script&gt;
+        </code></pre>
+        </article>
+        <header id="jsh">JS</header>
+        <header id="cssh">CSS</header>
+        <article id="js">
+        FINALLY! A way to have includes in js!
+        <br/><br/>
+        A JS Example:
+        <br/><br/>
+        Before you yell at me! <code>#pragma once</code> would work fine as well! (Remember not to have it in a.js in this example or wam will give you a warning about having <code>#pragma once</code> in your main file)
+        <pre class="nolines"><code>a.js:1:9: warning: #pragma once in main file
+#pragma once
+        ^
+1 warning generated.</code></pre>
+        Of course you could always send <code>-w</code> to ignore warnings
+        <br/><br/>
+        a.js - 
+        <pre><code>#ifndef A
+#define A
+
+#include "b.js"
+#include "c.js"
+
+var a = b
+
+PRINT(a)
+
+#endif</code></pre>
+        b.js - 
+        <pre><code>#ifndef B
+#define B
+
+#include "c.js"
+
+var b = 4
+
+PRINT(b)
+
+#endif</code></pre>
+        c.js - 
+        <pre><code>#ifndef C
+#define C
+
+#define PRINT(msg) console.log(msg)
+
+#endif</code></pre>
+        Now to compile
+        <pre class="hidelines"><code>$ wam a.js -M</code></pre>
+        Result: a.o.js
+        <pre><code>var b = 4
+console.log(b)
+var a = b
+console.log(a)</code></pre>
+        Now to minify
+        <pre class="hidelines"><code>$ wam a.js
+    --or--
+$ wam a.o.js -m</code></pre>
+        Result: a.o.js or a.min.js (depends on above decision respectively)
+        <pre><code>var b=4;console.log(b);var a=b;console.log(a);</code></pre>
+        </article>
+        <article id="css">
+        <div class="color-flat-red">
+        NOTE:<br/><br/>
+        There is currently an issue with id selectors (#) being mixed up with preprocessor arguments.  I am working on a solution for this.
+        <br/><br/>
+        For the time being, please replace all # at the begining of lines with $.  You may choose to replace all id selectors (#) with $ for consistency.
+        <br/><br/>
+        If anyone has any suggestions on how to fix this issue please let me know.  Thanks! and sorry for the inconvenience.
+        </div>
+        <br/><br/>
+        FINALLY! A way to have defines in css!
+        <br/><br/>
+        a.css - 
+        <pre><code>#include "b.css"
+body{
+    background:RED;
+}</code></pre>
+        b.css - 
+        <pre><code>#pragma once
+#define RED     #FF0000
+#define GREEN   #00FF00
+#define BLUE    #0000FF
+
+#define COLOR(name,c)   \
+    .color-name{        \
+        color:c;        \
+    }
+
+COLOR(red,RED)
+COLOR(green,GREEN)
+COLOR(blue,BLUE)</code></pre>
+        Now to compile
+        <pre class="hidelines"><code>$ wam a.css -M</code></pre>
+        Result: a.o.css
+        <pre><code>.color-red{ color:#FF0000; }
+.color-green{ color:#00FF00; }
+.color-blue{ color:#0000FF; }
+body{
+    background:#FF0000;
+}</code></pre>
+        Now to minify
+        <pre class="hidelines"><code>$ wam a.css
+    --or--
+$ wam a.o.css -m</code></pre>
+        Result: a.o.css or a.min.css (depends on above decision respectively)
+        <pre><code>.color-red{color:#f00}.color-green{color:#0f0}.color-blue{color:#00f}body{background:#f00}</code></pre>
+        </article>
+    </section>
+</body>
+<script>
+(function() {
+    var pre = document.getElementsByTagName('pre'),
+        pl = pre.length;
+    for (var i = 0; i < pl; i++) {
+        pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
+        var num = pre[i].innerHTML.split(/\n/).length;
+        for (var j = 0; j < num; j++) {
+            var line_num = pre[i].getElementsByTagName('span')[0];
+            line_num.innerHTML += '<span>' + (j + 1) + '</span>';
+        }
+    }
+})();
+</script>
+<style>
+body {background-color:white;padding:50px 50px}
+
+
+pre {
+  background-color:#eee;
+  overflow:auto;
+  margin:1em 0 1em;
+  padding:.5em 1em;
+}
+
+pre code,
+pre .line-number {
+  font:normal normal 12px/14px "Courier New",Courier,Monospace;
+  color:black;
+  display:block;
+  padding-right:10px;
+}
+
+pre .line-number {
+  float:left;
+  margin:0 1em 0 -1em;
+  border-right:1px solid;
+  text-align:right;
+}
+
+pre .line-number span {
+  display:block;
+  padding:0 .5em 0 1em;
+}
+
+pre.hidelines .line-number{
+    visibility: hidden;
+}
+pre.nolines .line-number{
+    display:none;
+}
+
+pre .cl {
+  display:block;
+  clear:both;
+}
+
+pre.inl{
+    margin:10px;
+    border-radius:2px;
+}
+
+</style>
+</html>
